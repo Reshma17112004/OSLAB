@@ -5,5 +5,5 @@
 ![sample output](sampleoutput.png)
 
 # tested output
-![tested output](testedoutput.png)
+![tested output](Testedoutput.png)
 
