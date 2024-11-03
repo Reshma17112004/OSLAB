@@ -1,0 +1,44 @@
+import numpy as np
+
+def main():
+    n = int(input("Enter the no of processes -- "))
+    bu = np.zeros(n, dtype=int)
+    ct = np.zeros(n, dtype=int)
+    wa = np.zeros(n, dtype=int)
+    tat = np.zeros(n, dtype=int)
+    
+    for i in range(n):
+        bu[i] = int(input(f"\nEnter Burst Time for process {i+1} -- "))
+        ct[i] = bu[i]
+    
+    t = int(input("\nEnter the size of time slice -- "))
+    max_burst = max(bu)
+    temp = 0
+    att = 0
+    awt = 0
+    
+    for j in range((max_burst // t) + 1):
+        for i in range(n):
+            if bu[i] != 0:
+                if bu[i] <= t:
+                    tat[i] = temp + bu[i]
+                    temp += bu[i]
+                    bu[i] = 0
+                else:
+                    bu[i] -= t
+                    temp += t
+    
+    for i in range(n):
+        wa[i] = tat[i] - ct[i]
+        att += tat[i]
+        awt += wa[i]
+    
+    print(f"\nThe Average Turnaround time is -- {att / n}")
+    print(f"\nThe Average Waiting time is -- {awt / n}")
+    print("\n\tPROCESS\t BURST TIME \t WAITING TIME\tTURNAROUND TIME")
+    for i in range(n):
+        print(f"\t{i+1} \t {ct[i]} \t\t {wa[i]} \t\t {tat[i]}")
+
+if __name__ == "__main__":
+    main()
+
